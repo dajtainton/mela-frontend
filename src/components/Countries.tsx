@@ -7,7 +7,7 @@ export default function Countries() {
   const [countries, setCountries] = useState<CountryProps[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const { selected, isSelected, onChange } = useMultiselect([]);
-  const apiUrl : string | undefined  = import.meta.env.API_URL 
+  const apiUrl : string | undefined  = import.meta.env.VITE_API_URL 
 
   useEffect(() => {
     const getCountries = async () => {
@@ -42,7 +42,7 @@ export default function Countries() {
     try {
       setIsLoading(true);
       const res = await fetch(
-        `http://localhost:8000/api/v1/countries?search=${searchText}`
+        `${apiUrl}?search=${searchText}`
       );
       const data: CountryProps[] = await res.json();
       setCountries(data);
